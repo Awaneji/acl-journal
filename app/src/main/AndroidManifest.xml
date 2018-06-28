@@ -19,6 +19,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.CategoryActivity" />
+        <activity
+            android:name=".ui.JournalsActivity"
+            android:label="@string/title_activity_journals"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.JournalActivity">
+
+        </activity>
     </application>
 
 </manifest>
