@@ -7,9 +7,28 @@
     tools:context=".ui.MainActivity">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/materialup_appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/main.collapsing"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:expandedTitleMarginEnd="64dp"
+            app:expandedTitleMarginStart="48dp"
+            app:layout_scrollFlags="scroll|snap">
+            ​
+
+            <ImageView
+                android:id="@+id/materialup.profile_backdrop"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/header_img"
+                app:layout_collapseMode="parallax" />
+        </android.support.design.widget.CollapsingToolbarLayout>
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -18,10 +37,41 @@
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
+        <LinearLayout
+            android:id="@+id/materialup.title_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingTop="8dp"
+            app:layout_scrollFlags="scroll|enterAlways|snap">
+            ​
+
+            <TextView
+                android:id="@+id/tv_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+                tools:text="Kudzanai Tsuro" />
+            ​
+
+            <TextView
+                android:id="@+id/tv_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="4dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle"
+                android:textColor="@android:color/white"
+                tools:text="@string/app_name" />
+            ​
+        </LinearLayout>
+
+
+
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_main" />
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
@@ -29,5 +79,18 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@android:drawable/ic_input_add" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/materialup.profile_image"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_gravity="center_horizontal"
+        android:elevation="8dp"
+        android:src="@drawable/user_avatar"
+        app:layout_anchor="@id/materialup.title_container"
+        app:layout_anchorGravity="top|center_horizontal"
+        app:layout_scrollFlags="scroll"
+
+        />
 
 </android.support.design.widget.CoordinatorLayout>
