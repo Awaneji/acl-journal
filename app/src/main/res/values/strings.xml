@@ -28,4 +28,10 @@
     <string name="delete_journal">Delete journal</string>
     <string name="cannot_delete">Only saved journals can be deleted</string>
     <string name="delete_journal_success">Journal deleted</string>
+    <string name="ok">OK</string>
+    <string name="cancel">CANCEL</string>
+    <string name="journal_category">Journal Category</string>
+    <string name="category">Category</string>
+    <string name="enter_title">Enter title</string>
+    <string name="type_your_story">Type your story</string>
 </resources>

@@ -27,7 +27,7 @@
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter title"
+                android:hint="@string/enter_title"
                 android:inputType="text|textCapSentences"
                 android:padding="8dp" />
         </android.support.design.widget.TextInputLayout>
@@ -45,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:hint="Type your story"
+                android:hint="@string/type_your_story"
                 android:inputType="textMultiLine|textCapSentences"
                 android:padding="8dp" />
 
