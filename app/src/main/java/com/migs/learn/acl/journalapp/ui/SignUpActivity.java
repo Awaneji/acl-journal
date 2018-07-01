@@ -17,6 +17,7 @@ import com.google.android.gms.common.SignInButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.migs.learn.acl.journalapp.BuildConfig;
 import com.migs.learn.acl.journalapp.R;
+import com.migs.learn.acl.journalapp.utils.Utils;
 
 import java.util.Collections;
 
@@ -39,24 +40,21 @@ public class SignUpActivity extends AppCompatActivity {
         mRootView = findViewById(R.id.rootView);
         mSignUp = findViewById(R.id.btn_google_sign_up);
 
-        mSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivityForResult(
-                        AuthUI.getInstance()
-                                .createSignInIntentBuilder()
-                                .setLogo(R.mipmap.ic_launcher)
-                                .setTosAndPrivacyPolicyUrls(GOOGLE_TOS_URL, GOOGLE_PRIVACY_POLICY_URL)
-                                .setTheme(R.style.GreenTheme)
-                                .setIsSmartLockEnabled(!BuildConfig.DEBUG /* credentials */, true /* hints */)
-                                .setAvailableProviders(Collections.singletonList(
-                                        new AuthUI.IdpConfig.GoogleBuilder().build()))
-                                .build(),
-                        RC_SIGN_IN);
-            }
-        });
+        mSignUp.setOnClickListener(view -> startAuthUiActivity());
+    }
 
-
+    private void startAuthUiActivity() {
+        startActivityForResult(
+                AuthUI.getInstance()
+                        .createSignInIntentBuilder()
+                        .setLogo(R.mipmap.ic_launcher)
+                        .setTosAndPrivacyPolicyUrls(GOOGLE_TOS_URL, GOOGLE_PRIVACY_POLICY_URL)
+                        .setTheme(R.style.GreenTheme)
+                        .setIsSmartLockEnabled(!BuildConfig.DEBUG /* credentials */, true /* hints */)
+                        .setAvailableProviders(Collections.singletonList(
+                                new AuthUI.IdpConfig.GoogleBuilder().build()))
+                        .build(),
+                RC_SIGN_IN);
     }
 
     private void startSignedInActivity(IdpResponse response) {
@@ -97,22 +95,19 @@ public class SignUpActivity extends AppCompatActivity {
             // Sign in failed
             if (response == null) {
                 // User pressed back button
-                showSnackbar(R.string.sign_in_cancelled);
+                Utils.showSnackbar(R.string.sign_in_cancelled,mRootView);
                 return;
             }
 
             if (response.getError().getErrorCode() == ErrorCodes.NO_NETWORK) {
-                showSnackbar(R.string.no_internet_connection);
+                Utils.showSnackbar(R.string.no_internet_connection,mRootView);
                 return;
             }
 
-            showSnackbar(R.string.unknown_error);
+            Utils.showSnackbar(R.string.unknown_error,mRootView);
             Log.e(TAG, "Sign-in error: ", response.getError());
         }
     }
 
-    private void showSnackbar(@StringRes int errorMessageRes) {
-        Snackbar.make(mRootView, errorMessageRes, Snackbar.LENGTH_LONG).show();
-    }
 
 }

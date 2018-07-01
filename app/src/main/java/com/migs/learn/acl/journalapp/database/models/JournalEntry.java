@@ -7,27 +7,42 @@ import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-@Entity(tableName = "journal", foreignKeys = @ForeignKey(entity = JournalCategory.class, parentColumns = {"categoryId"}, childColumns = {"categoryId"}),
+import java.util.Date;
+
+//@IgnoreExtraProperties
+@Entity(tableName = "journal",
+        foreignKeys = @ForeignKey(entity = JournalCategory.class,
+                parentColumns = {"categoryId"},
+                childColumns = {"categoryId"},
+                onDelete = ForeignKey.CASCADE),
         indices = @Index(value = {"categoryId"}, name = "categoryId"))
 public class JournalEntry {
 
     @PrimaryKey
     private Integer journalId;
 
-    @NonNull
+    //@PropertyName("content")
     private String content;
 
-    @NonNull
+    //@PropertyName("title")
     private String title;
 
-    @NonNull
     private Long createDate;
 
-    @NonNull
     private Integer categoryId;
 
+    private String firebaseRef;
+
     @Ignore
-    public JournalEntry(Integer journalId, @NonNull String content, @NonNull Long createDate, @NonNull Integer categoryId, @NonNull String title) {
+    //@ServerTimestamp
+    private Date timeStamp;
+
+    @Ignore
+    public JournalEntry() {
+    }
+
+    @Ignore
+    public JournalEntry(Integer journalId, String content, Long createDate, Integer categoryId, String title) {
         this.journalId = journalId;
         this.content = content;
         this.createDate = createDate;
@@ -35,7 +50,13 @@ public class JournalEntry {
         this.title = title;
     }
 
-    public JournalEntry(@NonNull String content, @NonNull Long createDate, @NonNull Integer categoryId, @NonNull String title) {
+    @Ignore
+    public JournalEntry(String content, String title) {
+        this.content = content;
+        this.title = title;
+    }
+
+    public JournalEntry(String content, Long createDate, Integer categoryId, String title) {
         this.content = content;
         this.createDate = createDate;
         this.categoryId = categoryId;
@@ -84,5 +105,21 @@ public class JournalEntry {
 
     public void setTitle(@NonNull String title) {
         this.title = title;
+    }
+
+    public String getFirebaseRef() {
+        return firebaseRef;
+    }
+
+    public void setFirebaseRef(String firebaseRef) {
+        this.firebaseRef = firebaseRef;
+    }
+
+    public Date getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(Date timeStamp) {
+        this.timeStamp = timeStamp;
     }
 }

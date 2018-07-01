@@ -26,8 +26,17 @@ public class JournalCategoryRepo {
         return journalCategoryDAO.getJournalCategoryById(categoryId);
     }
 
+    public LiveData<List<JournalCategory>> getAllJournalCategoriesExcept(int categoryId) {
+        return journalCategoryDAO.getAllJournalCategoriesExcept(categoryId);
+    }
+
     public void saveCategory(JournalCategory category) {
         new InsertJournalCategoryAsync(journalCategoryDAO).execute(category);
+
+    }
+
+    public void deleteCategory(JournalCategory category) {
+        new DeleteJournalCategoryAsync(journalCategoryDAO).execute(category);
 
     }
 
@@ -43,6 +52,22 @@ public class JournalCategoryRepo {
         @Override
         protected Void doInBackground(JournalCategory... journalCategories) {
             categoryDAO.insertJournalCategory(journalCategories[0]);
+            return null;
+        }
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private class DeleteJournalCategoryAsync extends AsyncTask<JournalCategory, Void, Void> {
+
+        private JournalCategoryDAO categoryDAO;
+
+        public DeleteJournalCategoryAsync(JournalCategoryDAO journalCategoryDAO) {
+            this.categoryDAO = journalCategoryDAO;
+        }
+
+        @Override
+        protected Void doInBackground(JournalCategory... journalCategories) {
+            categoryDAO.deleteCategory(journalCategories[0]);
             return null;
         }
     }

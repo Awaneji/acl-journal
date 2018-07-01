@@ -11,4 +11,21 @@
     <string name="action_sign_out">Sign out</string>
     <string name="sign_in_failed">Sign in failed</string>
     <string name="sign_out_failed">Sign out failed</string>
+    <string name="firebase_success_msg">Record saved successfully on the cloud</string>
+    <string name="firebase_success_failure">Cloud sync failed.</string>
+    <string name="blank_msg">Must no be blank</string>
+    <string name="notify_blank_msg">Cannot save a blank journal</string>
+    <string name="category_failed_save">Failed to save</string>
+    <string name="category_saved">Journal Category saved successfully</string>
+    <string name="save">Save</string>
+    <string name="save_journal">Save journal</string>
+    <string name="move_to">Move to</string>
+    <string name="move_tooltip">Move journal to</string>
+    <string name="copy_to">Copy to</string>
+    <string name="copy_to_tooltip">Copy journal to</string>
+    <string name="restrict_copy_or_delete">Only saved journals can be moved or copied.</string>
+    <string name="success_copy_or_move">Move/Copy was successful</string>
+    <string name="delete_journal">Delete journal</string>
+    <string name="cannot_delete">Only saved journals can be deleted</string>
+    <string name="delete_journal_success">Journal deleted</string>
 </resources>

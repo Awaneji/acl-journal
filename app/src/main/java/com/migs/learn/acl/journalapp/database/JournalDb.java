@@ -23,6 +23,7 @@ public abstract class JournalDb extends RoomDatabase {
 
     private static final String DATABASE_NAME = "journal_db";
     private static final String DEFAULT_CATEGORY = "Happy Thoughts";
+    public static final String CATEGORY_QUOTES = "My quotes";
     private static volatile JournalDb databaseInstance;
 
     // calllback to insert default Category data
@@ -69,13 +70,9 @@ public abstract class JournalDb extends RoomDatabase {
         @Override
         protected Void doInBackground(Void... voids) {
 
-            JournalCategory category = new JournalCategory(DEFAULT_CATEGORY, IconSet.AB.getIconId());
-            categoryDAO.insertJournalCategory(category);
-
-            JournalCategory journalCategory = new JournalCategory("Another one",IconSet.AB.getIconId());
-            categoryDAO.insertJournalCategory(journalCategory);
-            categoryDAO.insertJournalCategory(new JournalCategory("My quotes",IconSet.AB.getIconId()));
-            categoryDAO.insertJournalCategory(new JournalCategory("Wild thoughts", IconSet.AB.getIconId()));
+            //load 2 default categories
+            categoryDAO.insertJournalCategory(new JournalCategory(DEFAULT_CATEGORY, IconSet.AB.getIconId()));
+            categoryDAO.insertJournalCategory(new JournalCategory(CATEGORY_QUOTES,IconSet.AB.getIconId()));
 
             return null;
         }

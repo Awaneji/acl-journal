@@ -26,6 +26,10 @@ public class JournalEntryRepo {
         new UpdateJournalAsync(journalEntryDAO).execute(entry);
     }
 
+    public void deleteJournal(JournalEntry entry) {
+        new DeleteJournalAsync(journalEntryDAO).execute(entry);
+    }
+
     public LiveData<List<JournalEntry>> getAllJournalEntriesByCategory(int categoryId) {
         return journalEntryDAO.getAllJournalsByCategory(categoryId);
     }
@@ -49,6 +53,21 @@ public class JournalEntryRepo {
         @Override
         protected Void doInBackground(JournalEntry... journalEntries) {
             journalDAO.insertJournal(journalEntries[0]);
+            return null;
+        }
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private class DeleteJournalAsync extends AsyncTask<JournalEntry, Void, Void> {
+        private JournalEntryDAO journalDAO;
+
+        public DeleteJournalAsync(JournalEntryDAO journalDAO) {
+            this.journalDAO = journalDAO;
+        }
+
+        @Override
+        protected Void doInBackground(JournalEntry... journalEntries) {
+            journalDAO.deleteJournal(journalEntries[0]);
             return null;
         }
     }

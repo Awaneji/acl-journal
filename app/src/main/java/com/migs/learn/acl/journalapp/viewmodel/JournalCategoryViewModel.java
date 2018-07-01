@@ -18,6 +18,7 @@ public class JournalCategoryViewModel extends AndroidViewModel {
     private LiveData<JournalCategory> categoryLiveData;
     private MutableLiveData<Integer> categoryIdData = new MutableLiveData<>();
     private LiveData<List<JournalCategory>> categories;
+    private LiveData<List<JournalCategory>> categoriesSelect;
     private JournalCategoryRepo categoryRepo;
 
     public JournalCategoryViewModel(@NonNull Application application) {
@@ -34,8 +35,18 @@ public class JournalCategoryViewModel extends AndroidViewModel {
                 return categoryRepo.getCategoryById(input);
         });
 
+        categoriesSelect = Transformations.switchMap(categoryIdData, input -> {
+            if (input == null)
+                return AbsentLiveData.create();
+            else
+                return categoryRepo.getAllJournalCategoriesExcept(input);
+        });
+
     }
 
+    public LiveData<List<JournalCategory>> getCategoriesSelect() {
+        return categoriesSelect;
+    }
 
     public LiveData<JournalCategory> getCategory() {
         return categoryLiveData;
@@ -47,6 +58,10 @@ public class JournalCategoryViewModel extends AndroidViewModel {
 
     public void createCategory(JournalCategory category) {
         categoryRepo.saveCategory(category);
+    }
+
+    public void deleteCategory(JournalCategory category) {
+        categoryRepo.deleteCategory(category);
     }
 
     public void setCategoryIdData(Integer categoryId) {

@@ -20,6 +20,7 @@ public class JournalEntryViewModel extends AndroidViewModel {
     private LiveData<List<JournalEntry>> allJournalEntries;
     private LiveData<List<JournalEntry>> categoryJournalEntries;
 
+
     private MutableLiveData<Integer> journalIdData = new MutableLiveData<>();
     private MutableLiveData<Integer> categoryIdData = new MutableLiveData<>();
 
@@ -62,6 +63,10 @@ public class JournalEntryViewModel extends AndroidViewModel {
 
     public void updateJournal(JournalEntry journalEntry) {
         entryRepo.updateJournal(journalEntry);
+    }
+
+    public void deleteJournal(JournalEntry journalEntry) {
+        entryRepo.deleteJournal(journalEntry);
     }
 
     public void setJournalIdData(Integer journalId) {

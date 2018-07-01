@@ -29,33 +29,27 @@ public class JournalsActivity extends AppCompatActivity implements JournalEntryA
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_journals);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        tvCategory = findViewById(R.id.tv_category);
-        journalsRecyclerView = findViewById(R.id.rv_journals);
 
-        setSupportActionBar(toolbar);
-        // Get a support ActionBar corresponding to this toolbar
-        ActionBar ab = getSupportActionBar();
-
-        // Enable the Up button
-        ab.setDisplayHomeAsUpEnabled(true);
-
-        // get intent data
         Intent categoryData = getIntent();
         int categoryId = categoryData.getIntExtra(CATEGORY_ID, -1);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
+
+        tvCategory = findViewById(R.id.tv_category);
+        journalsRecyclerView = findViewById(R.id.rv_journals);
 
         adapter = new JournalEntryAdapter(this);
         adapter.setClickHandler(this);
         setUpDetails(categoryId);
 
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent journalIntent = new Intent(JournalsActivity.this, JournalActivity.class);
-                journalIntent.putExtra(JournalActivity.CATEGORY_ID, categoryId);
-                startActivity(journalIntent);
-            }
+        fab.setOnClickListener(view -> {
+            Intent journalIntent = new Intent(JournalsActivity.this, JournalActivity.class);
+            journalIntent.putExtra(JournalActivity.CATEGORY_ID, categoryId);
+            startActivity(journalIntent);
         });
     }
 

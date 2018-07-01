@@ -11,10 +11,11 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         resConfigs "en"
+        multiDexEnabled true
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -35,21 +36,15 @@ dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "com.android.support:appcompat-v7:$support_version"
-    implementation 'com.android.support.constraint:constraint-layout:1.1.1'
     implementation "com.android.support:design:$support_version"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.1'
     implementation "com.android.support:recyclerview-v7:$support_version"
     implementation "com.android.support:preference-v7:$support_version"
-    implementation "com.android.support:cardview-v7:$support_version"
-
+    implementation 'com.android.support:multidex:1.0.3'
 
     /*-----------ROOM-------------*/
     implementation "android.arch.persistence.room:runtime:$room_version"
     annotationProcessor "android.arch.persistence.room:compiler:$room_version"
-
-    // optional - RxJava support for Room
-    implementation "android.arch.persistence.room:rxjava2:$room_version"
-    // Test helpers
-    testImplementation "android.arch.persistence.room:testing:$room_version"
     /*-----------ROOM-------------*/
 
     /*-----------ViewModel and LiveData------------*/
@@ -60,14 +55,16 @@ dependencies {
     testImplementation "android.arch.core:core-testing:$lifecycle_version"
     /*-----------ViewModel and LiveData------------*/
 
-    /*---------Firebase---------*/
+    /*---------Firebase Tools---------*/
     implementation 'com.google.firebase:firebase-core:16.0.1'
     implementation 'com.google.firebase:firebase-auth:16.0.2'
-    /*---------Firebase---------*/
+    implementation 'com.google.android.gms:play-services-auth:15.0.1'
 
-    /*-----------Firebase Auth UI-------------*/
+    /*---------Firebase Tools---------*/
+
+    /*-----------Firebase UI-------------*/
     implementation 'com.firebaseui:firebase-ui-auth:4.1.0'
-    /*-----------Firebase Auth UI-------------*/
+    /*-----------Firebase UI-------------*/
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
