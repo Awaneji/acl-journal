@@ -16,7 +16,7 @@ I used Firebase Authentication's Google provider with the help of Firebase-ui op
 Due to some issues (incompatibility), as I added Firestore dependencies (all/most of the -auth-ui classes threw a runtime Exception, NoClassDefFoundError and ClassNotFoundException), I commented out parts for using Firestore and used ROOM only. You can find the code for using Firestore in the classes.
 
 # Instrumentation test
-Used Espresso
+Non implemented
 
 # Unit tests
-Used Junit and Mockito
+Non Implemented
